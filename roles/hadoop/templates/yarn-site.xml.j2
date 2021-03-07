@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<configuration>
+{% for item in yarn_site_properties %}
+  <property>
+    <name>{{ item.name }}</name>
+    <value>{{ item.value }}</value>
+  </property>
+{% endfor %}
+</configuration>

@@ -1,0 +1,6 @@
+---
+- name: Create folder Hadoop
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ hadoop_create_path }}"

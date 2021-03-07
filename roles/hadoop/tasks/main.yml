@@ -1,0 +1,7 @@
+---
+- name: Includes base variables
+  include_vars:
+    dir: vars
+- include_tasks: pre_deploy.yml
+- include_tasks: install_hdfs.yml
+- include_tasks: config_hadoop.yml

@@ -1,0 +1,5 @@
+---
+- name: Hadoop format
+  shell: hdfs namenode -format
+- name: Hadoop run
+  shell: $HADOOP_HOME/sbin/start-all.sh
