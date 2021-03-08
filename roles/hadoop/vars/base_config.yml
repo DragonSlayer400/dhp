@@ -12,7 +12,7 @@ hadoop_dfs_data: "/opt/hadoop/dfs/data"
 hadoop_log_path: "/opt/hadoop/logs"
 hadoop_tmp_dir: "{{ hadoop_path }}/tmp"
 dfs_namenode_httpport: 9001
-
+master_node: "{{ hostvars[groups.master[0]]['ansible_host'] }}"
 
 # yarn config
 yarn_resourcemanager_port: 8040
@@ -31,7 +31,7 @@ hadoop_create_path:
 core_site_properties:
     - {
         "name" : "fs.defaultFS",
-        "value" : "hdfs://{{ master }}:{{ hadoop_port }}"
+        "value" : "hdfs://{{ master_node }}:{{ hadoop_port }}"
     }
     - {
         "name" : "hadoop.tmp.dir",
@@ -48,7 +48,7 @@ core_site_properties:
 hdfs_site_properties:
     - {
         "name" : "dfs.namenode.secondary.http-address",
-        "value" : "{{ master }}:{{ dfs_namenode_httpport }}"
+        "value" : "{{ master_node }}:{{ dfs_namenode_httpport }}"
     }
     - {
         "name" : "dfs.namenode.name.dir",
@@ -82,23 +82,23 @@ mapred_site_properties:
 yarn_site_properties:
     - {
        "name" : "yarn.resourcemanager.address",
-       "value" : "{{ master }}:{{ yarn_resourcemanager_port  }}"
+       "value" : "{{ master_node }}:{{ yarn_resourcemanager_port  }}"
     }
     - {
        "name" : "yarn.resourcemanager.scheduler.address",
-       "value" : "{{ master }}:{{ yarn_resourcemanager_scheduler_port }}"
+       "value" : "{{ master_node }}:{{ yarn_resourcemanager_scheduler_port }}"
     }
     - {
         "name" : "yarn.resourcemanager.webapp.address",
-        "value" : "{{ master }}:{{ yarn_resourcemanager_webapp_port }}"
+        "value" : "{{ master_node }}:{{ yarn_resourcemanager_webapp_port }}"
     }
     - {
         "name" : "yarn.resourcemanager.resource-tracker.address",
-        "value" : "{{ master }}:{{ yarn_resourcemanager_tracker_port }}"
+        "value" : "{{ master_node }}:{{ yarn_resourcemanager_tracker_port }}"
     }
     - {
         "name" : "yarn.resourcemanager.admin.address",
-        "value" : "{{ master }}:{{ yarn_resourcemanager_admin_port }}"
+        "value" : "{{ master_node }}:{{ yarn_resourcemanager_admin_port }}"
     }
     - {
         "name" : "yarn.nodemanager.aux-services",

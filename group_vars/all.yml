@@ -1,0 +1,5 @@
+---
+ssh_user_master : "****"
+ssh_pass_master : "****"
+ssh_user_slave  : "****"
+ssh_pass_slave  : "****"

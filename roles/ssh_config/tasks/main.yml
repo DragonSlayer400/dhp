@@ -1,0 +1,27 @@
+---
+- name: Mkdir .ssh directory
+  file:
+    path: ~/.ssh
+    state: directory
+
+- name: Generate ssh private key master node
+  openssh_keypair:
+    path: "/{{ ssh_user_master }}/.ssh/id_rsa"
+    owner: "{{ ssh_user_master }}"
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['master'] }}"
+  run_once: true
+
+- name: Generated ssh public key master node
+  file:
+    path: "/{{ ssh_user_master }}/.ssh/id_rsa.pub"
+    owner: "{{ ssh_user_master }}"
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['master'] }}"
+  run_once: true
+
+- name: SSH copy id
+  command: sshpass -p "{{ ssh_pass_slave }}" ssh-copy-id -i ~/.ssh/id_rsa.pub {{ ssh_user_slave }}@{{ hostvars[item]['ansible_host'] }} -f -o StrictHostKeyChecking=no
+  delegate_to: "{{ groups.master[0] }}"
+  with_items: "{{ groups['all'] }}"
+  run_once: true

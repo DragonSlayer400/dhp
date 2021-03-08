@@ -12,7 +12,10 @@
   template: src=yarn-site.xml.j2 dest={{ hadoop_cofig_path }}/yarn-site.xml
 
 - name: "Copy Hadoop workers"
-  template: src=workers.j2 dest={{ hadoop_cofig_path }}/workers
+  template: src=masters.j2 dest={{ hadoop_cofig_path }}/masters
+
+- name: "Copy Hadoop workers"
+  template: src=slaves.j2 dest={{ hadoop_cofig_path }}/slaves
 
 - name: "Copy Hadoop Env Script"
   template: src=hadoop-env.sh.j2 dest=/etc/profile.d/hadoop-env.sh

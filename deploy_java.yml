@@ -4,5 +4,4 @@
   vars_files:
     - "group_vars/all.yml"
   roles:
-    - pre_deploy
-    - hadoop
+    - java_config

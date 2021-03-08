@@ -1,5 +1,11 @@
 ---
 - name: Hadoop format
-  shell: hdfs namenode -format
+  command: hdfs namenode -format -nonInteractive -force
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['master'] }}"
+  run_once: true
 - name: Hadoop run
-  shell: $HADOOP_HOME/sbin/start-all.sh
+  command: start-all.sh
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['master'] }}"
+  run_once: true
